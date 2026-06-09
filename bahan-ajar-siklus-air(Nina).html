@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bahan Ajar Interaktif – Siklus Air | Kelas 4 SD</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Baloo+2:wght@400;600;700;800&display=swap');
+
+  :root {
+    --sky: #4FC3F7;
+    --deep-sky: #0277BD;
+    --cloud: #E3F2FD;
+    --water: #1565C0;
+    --earth: #5D4037;
+    --grass: #388E3C;
+    --sun: #FFB300;
+    --rain: #64B5F6;
+    --steam: #B3E5FC;
+    --accent: #FF7043;
+    --white: #FFFFFF;
+    --text: #1A237E;
+    --card-bg: #F8FBFF;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: linear-gradient(180deg, #E3F2FD 0%, #B3E5FC 40%, #E8F5E9 80%, #FFF9C4 100%);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  /* HEADER */
+  header {
+    background: linear-gradient(135deg, var(--deep-sky), var(--water));
+    color: white;
+    text-align: center;
+    padding: 28px 20px 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '☁️';
+    font-size: 80px;
+    position: absolute;
+    top: -10px; left: -20px;
+    opacity: 0.2;
+    animation: floatCloud 6s ease-in-out infinite;
+  }
+  header::after {
+    content: '☁️';
+    font-size: 60px;
+    position: absolute;
+    top: 5px; right: 10px;
+    opacity: 0.2;
+    animation: floatCloud 8s ease-in-out infinite reverse;
+  }
+  @keyframes floatCloud {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(15px); }
+  }
+
+  .badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.25);
+    border: 2px solid rgba(255,255,255,0.5);
+    border-radius: 20px;
+    padding: 4px 16px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+  }
+
+  header h1 {
+    font-family: 'Baloo 2', cursive;
+    font-size: clamp(22px, 5vw, 38px);
+    font-weight: 800;
+    text-shadow: 2px 3px 0 rgba(0,0,0,0.2);
+    line-height: 1.2;
+  }
+  header p {
+    font-size: 15px;
+    opacity: 0.9;
+    margin-top: 8px;
+  }
+
+  /* TABS */
+  .tabs {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    padding: 20px 16px 0;
+    flex-wrap: wrap;
+  }
+  .tab-btn {
+    background: white;
+    border: 2.5px solid var(--sky);
+    color: var(--deep-sky);
+    border-radius: 30px;
+    padding: 10px 20px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }
+  .tab-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+  .tab-btn.active {
+    background: var(--deep-sky);
+    color: white;
+    border-color: var(--deep-sky);
+    box-shadow: 0 4px 12px rgba(2,119,189,0.35);
+  }
+
+  /* SECTIONS */
+  .section { display: none; padding: 20px 16px 40px; max-width: 760px; margin: 0 auto; }
+  .section.active { display: block; }
+
+  /* CARD */
+  .card {
+    background: var(--card-bg);
+    border-radius: 20px;
+    padding: 22px;
+    margin-bottom: 18px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    border: 1.5px solid rgba(79,195,247,0.3);
+  }
+  .card h2 {
+    font-family: 'Baloo 2', cursive;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--deep-sky);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  /* SIKLUS ANIMATION */
+  .cycle-wrapper {
+    background: linear-gradient(180deg, #87CEEB 0%, #B0E2FF 50%, #8BC34A 75%, #5D4037 100%);
+    border-radius: 20px;
+    padding: 20px;
+    position: relative;
+    min-height: 340px;
+    overflow: hidden;
+    margin-bottom: 18px;
+  }
+
+  .sun-anim {
+    position: absolute;
+    top: 10px; right: 20px;
+    font-size: 52px;
+    animation: sunPulse 3s ease-in-out infinite;
+    filter: drop-shadow(0 0 12px #FFB300);
+  }
+  @keyframes sunPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.12); }
+  }
+
+  .cloud-group {
+    position: absolute;
+    top: 18px; left: 30px;
+  }
+  .cloud-emoji { font-size: 44px; animation: cloudDrift 5s ease-in-out infinite; display: inline-block; }
+  @keyframes cloudDrift {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(18px); }
+  }
+
+  .mountain {
+    position: absolute;
+    bottom: 60px; left: 10px;
+    font-size: 64px;
+    filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.2));
+  }
+  .lake {
+    position: absolute;
+    bottom: 58px; right: 20px;
+    font-size: 50px;
+  }
+  .ground {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 60px;
+    background: linear-gradient(180deg, #5D4037, #3E2723);
+    border-radius: 0 0 20px 20px;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    gap: 6px;
+  }
+  .ground span { font-size: 22px; }
+
+  /* Animated elements */
+  .rain-drops {
+    position: absolute;
+    top: 65px;
+    left: 80px;
+    display: flex;
+    gap: 6px;
+    opacity: 0;
+    transition: opacity 0.5s;
+  }
+  .rain-drop {
+    width: 3px;
+    height: 14px;
+    background: #64B5F6;
+    border-radius: 2px;
+    animation: rainFall 0.8s linear infinite;
+  }
+  .rain-drop:nth-child(2) { animation-delay: 0.2s; }
+  .rain-drop:nth-child(3) { animation-delay: 0.4s; }
+  .rain-drop:nth-child(4) { animation-delay: 0.1s; }
+  .rain-drop:nth-child(5) { animation-delay: 0.3s; }
+  @keyframes rainFall {
+    0% { transform: translateY(0); opacity: 1; }
+    100% { transform: translateY(40px); opacity: 0; }
+  }
+  .rain-drops.show { opacity: 1; }
+
+  .evap-arrows {
+    position: absolute;
+    bottom: 105px; right: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    opacity: 0;
+    transition: opacity 0.5s;
+  }
+  .evap-arrow {
+    color: rgba(255,255,255,0.8);
+    font-size: 18px;
+    animation: riseUp 1.2s ease-in-out infinite;
+  }
+  .evap-arrow:nth-child(2) { animation-delay: 0.3s; }
+  .evap-arrow:nth-child(3) { animation-delay: 0.6s; }
+  @keyframes riseUp {
+    0%, 100% { transform: translateY(0); opacity: 0.3; }
+    50% { transform: translateY(-8px); opacity: 1; }
+  }
+  .evap-arrows.show { opacity: 1; }
+
+  /* Step labels */
+  .step-label {
+    position: absolute;
+    background: rgba(255,255,255,0.92);
+    border-radius: 10px;
+    padding: 5px 10px;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--deep-sky);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    opacity: 0;
+    transition: opacity 0.5s, transform 0.5s;
+    transform: translateY(8px);
+    pointer-events: none;
+  }
+  .step-label.show { opacity: 1; transform: translateY(0); }
+
+  #lbl-evap { top: 90px; right: 25px; }
+  #lbl-cond { top: 30px; left: 110px; }
+  #lbl-prec { top: 90px; left: 55px; }
+  #lbl-run  { bottom: 70px; left: 120px; }
+
+  /* STEP BUTTONS */
+  .step-buttons {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 14px;
+  }
+  .step-btn {
+    background: white;
+    border: 2px solid var(--sky);
+    border-radius: 12px;
+    padding: 8px 14px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    color: var(--deep-sky);
+    transition: all 0.2s;
+  }
+  .step-btn:hover, .step-btn.active {
+    background: var(--sky);
+    color: var(--water);
+    transform: scale(1.05);
+  }
+
+  .step-info {
+    background: white;
+    border-left: 4px solid var(--sky);
+    border-radius: 12px;
+    padding: 14px 16px;
+    margin-top: 12px;
+    min-height: 60px;
+    font-size: 15px;
+    line-height: 1.6;
+    transition: all 0.3s;
+  }
+  .step-info strong { color: var(--deep-sky); }
+
+  /* MATERI */
+  .materi-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  @media (max-width: 480px) { .materi-grid { grid-template-columns: 1fr; } }
+
+  .materi-item {
+    background: white;
+    border-radius: 16px;
+    padding: 16px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.07);
+    border-top: 4px solid var(--sky);
+    transition: transform 0.2s;
+    cursor: pointer;
+  }
+  .materi-item:hover { transform: translateY(-3px); }
+  .materi-item .icon { font-size: 32px; margin-bottom: 8px; }
+  .materi-item h3 { font-size: 15px; font-weight: 800; color: var(--water); margin-bottom: 6px; }
+  .materi-item p { font-size: 13px; line-height: 1.5; color: #444; }
+
+  /* KUIS */
+  .kuis-wrapper { }
+  .progress-bar-wrap {
+    background: #e0e0e0;
+    border-radius: 10px;
+    height: 10px;
+    margin-bottom: 16px;
+    overflow: hidden;
+  }
+  .progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--sky), var(--deep-sky));
+    border-radius: 10px;
+    transition: width 0.4s ease;
+  }
+
+  .soal-card {
+    background: white;
+    border-radius: 20px;
+    padding: 22px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+    margin-bottom: 14px;
+    border: 2px solid transparent;
+  }
+  .soal-num {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--sky);
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+  .soal-text { font-size: 17px; font-weight: 700; line-height: 1.5; margin-bottom: 16px; color: var(--text); }
+
+  .opsi-list { display: flex; flex-direction: column; gap: 10px; }
+  .opsi-btn {
+    background: #F0F7FF;
+    border: 2px solid #BBDEFB;
+    border-radius: 12px;
+    padding: 12px 16px;
+    text-align: left;
+    font-family: 'Nunito', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .opsi-btn:hover { background: #BBDEFB; transform: translateX(4px); }
+  .opsi-btn.benar { background: #E8F5E9; border-color: #4CAF50; color: #2E7D32; }
+  .opsi-btn.salah { background: #FFEBEE; border-color: #F44336; color: #C62828; }
+  .opsi-btn.disabled { pointer-events: none; }
+  .opsi-letter {
+    width: 28px; height: 28px;
+    background: var(--sky);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 800;
+    color: white; flex-shrink: 0;
+  }
+
+  .feedback-box {
+    border-radius: 12px;
+    padding: 12px 16px;
+    font-size: 14px;
+    font-weight: 600;
+    margin-top: 10px;
+    display: none;
+  }
+  .feedback-box.benar { background: #E8F5E9; color: #2E7D32; border-left: 4px solid #4CAF50; }
+  .feedback-box.salah { background: #FFEBEE; color: #C62828; border-left: 4px solid #F44336; }
+
+  .nav-kuis {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 14px;
+  }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--deep-sky), var(--water));
+    color: white;
+    border: none;
+    border-radius: 14px;
+    padding: 12px 24px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(2,119,189,0.35);
+    transition: all 0.2s;
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(2,119,189,0.4); }
+  .btn-primary:disabled { opacity: 0.4; pointer-events: none; }
+
+  /* HASIL */
+  .hasil-card {
+    text-align: center;
+    background: white;
+    border-radius: 24px;
+    padding: 36px 24px;
+    box-shadow: 0 6px 24px rgba(0,0,0,0.12);
+  }
+  .hasil-emoji { font-size: 72px; margin-bottom: 10px; }
+  .hasil-skor { font-family: 'Baloo 2', cursive; font-size: 56px; font-weight: 800; color: var(--deep-sky); }
+  .hasil-label { font-size: 18px; font-weight: 700; margin-bottom: 8px; color: var(--text); }
+  .hasil-pesan { font-size: 15px; color: #555; margin-bottom: 24px; line-height: 1.5; }
+  .star-row { font-size: 36px; margin-bottom: 16px; }
+
+  /* SCROLL */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-thumb { background: var(--sky); border-radius: 10px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="badge">📚 KELAS 4 SD · IPA</div>
+  <h1>🌊 Bahan Ajar Interaktif<br>Siklus Air</h1>
+  <p>Belajar, Eksplorasi, dan Uji Pemahamanmu!</p>
+</header>
+
+<div class="tabs">
+  <button class="tab-btn active" onclick="showTab('simulasi')">🌀 Simulasi</button>
+  <button class="tab-btn" onclick="showTab('materi')">📖 Materi</button>
+  <button class="tab-btn" onclick="showTab('kuis')">🎯 Kuis</button>
+</div>
+
+<!-- ============ TAB SIMULASI ============ -->
+<div id="tab-simulasi" class="section active">
+
+  <div class="card">
+    <h2>🌍 Simulasi Siklus Air</h2>
+    <p style="font-size:14px;color:#555;margin-bottom:14px;">Klik setiap tahap untuk melihat proses yang terjadi!</p>
+
+    <div class="cycle-wrapper">
+      <!-- Static elements -->
+      <div class="sun-anim">☀️</div>
+      <div class="cloud-group"><span class="cloud-emoji">⛅</span></div>
+      <div class="mountain">⛰️</div>
+      <div class="lake">🏞️</div>
+
+      <!-- Animated elements -->
+      <div class="rain-drops" id="rainDrops">
+        <div class="rain-drop"></div>
+        <div class="rain-drop"></div>
+        <div class="rain-drop"></div>
+        <div class="rain-drop"></div>
+        <div class="rain-drop"></div>
+      </div>
+      <div class="evap-arrows" id="evapArrows">
+        <div class="evap-arrow">↑</div>
+        <div class="evap-arrow">↑</div>
+        <div class="evap-arrow">↑</div>
+      </div>
+
+      <!-- Labels -->
+      <div class="step-label" id="lbl-evap">💨 Evaporasi</div>
+      <div class="step-label" id="lbl-cond">☁️ Kondensasi</div>
+      <div class="step-label" id="lbl-prec">🌧️ Presipitasi</div>
+      <div class="step-label" id="lbl-run">🌊 Aliran Air</div>
+
+      <div class="ground">
+        <span>🌱</span><span>🌿</span><span>🌱</span><span>🏠</span><span>🌿</span><span>🌱</span>
+      </div>
+    </div>
+
+    <div class="step-buttons">
+      <button class="step-btn" onclick="showStep('evap', this)">💧 Evaporasi</button>
+      <button class="step-btn" onclick="showStep('cond', this)">☁️ Kondensasi</button>
+      <button class="step-btn" onclick="showStep('prec', this)">🌧️ Presipitasi</button>
+      <button class="step-btn" onclick="showStep('run', this)">🌊 Aliran Air</button>
+      <button class="step-btn" onclick="showStep('all', this)">▶️ Semua</button>
+    </div>
+
+    <div class="step-info" id="stepInfo">
+      👆 Klik salah satu tahap di atas untuk mulai eksplorasi!
+    </div>
+  </div>
+</div>
+
+<!-- ============ TAB MATERI ============ -->
+<div id="tab-materi" class="section">
+
+  <div class="card">
+    <h2>📖 Apa itu Siklus Air?</h2>
+    <p style="font-size:15px;line-height:1.7;">
+      Siklus air (siklus hidrologi) adalah <strong>perjalanan air yang terus berulang</strong>
+      dari bumi ke atmosfer dan kembali lagi ke bumi. 
+      Air tidak pernah habis, hanya berubah bentuk dan berpindah tempat!
+    </p>
+  </div>
+
+  <div class="materi-grid">
+    <div class="materi-item" onclick="toggleMateri(this)">
+      <div class="icon">💧</div>
+      <h3>1. Evaporasi</h3>
+      <p>Penguapan air dari permukaan laut, danau, dan sungai karena panas matahari.</p>
+    </div>
+    <div class="materi-item" onclick="toggleMateri(this)" style="border-top-color:#4FC3F7">
+      <div class="icon">🌿</div>
+      <h3>Transpirasi</h3>
+      <p>Penguapan air dari daun dan tumbuhan. Evaporasi + Transpirasi = <em>Evapotranspirasi</em>.</p>
+    </div>
+    <div class="materi-item" onclick="toggleMateri(this)" style="border-top-color:#B0BEC5">
+      <div class="icon">☁️</div>
+      <h3>2. Kondensasi</h3>
+      <p>Uap air naik ke atas dan mendingin, lalu berubah menjadi titik-titik air yang membentuk awan.</p>
+    </div>
+    <div class="materi-item" onclick="toggleMateri(this)" style="border-top-color:#78909C">
+      <div class="icon">🌧️</div>
+      <h3>3. Presipitasi</h3>
+      <p>Air dari awan jatuh ke bumi dalam bentuk hujan, salju, atau es tergantung suhu.</p>
+    </div>
+    <div class="materi-item" onclick="toggleMateri(this)" style="border-top-color:#5D4037">
+      <div class="icon">🌊</div>
+      <h3>4. Aliran Permukaan</h3>
+      <p>Air hujan mengalir di atas tanah menuju sungai, danau, dan akhirnya ke laut.</p>
+    </div>
+    <div class="materi-item" onclick="toggleMateri(this)" style="border-top-color:#388E3C">
+      <div class="icon">🌱</div>
+      <h3>5. Infiltrasi</h3>
+      <p>Air meresap ke dalam tanah dan menjadi air tanah yang bisa dimanfaatkan makhluk hidup.</p>
+    </div>
+  </div>
+
+  <div class="card" style="background: linear-gradient(135deg, #E3F2FD, #E8EAF6);">
+    <h2>💡 Tahukah Kamu?</h2>
+    <ul style="list-style:none;display:flex;flex-direction:column;gap:10px;font-size:14px;line-height:1.6;">
+      <li>🌍 <strong>97%</strong> air di bumi adalah air asin di lautan.</li>
+      <li>❄️ Hanya <strong>3%</strong> yang merupakan air tawar, dan sebagian besar tersimpan di es kutub.</li>
+      <li>🔄 Satu tetes air bisa <strong>berulang kali</strong> melewati siklus ini selama jutaan tahun!</li>
+      <li>🌧️ Indonesia mendapat curah hujan rata-rata <strong>2.000–4.000 mm</strong> per tahun.</li>
+    </ul>
+  </div>
+
+</div>
+
+<!-- ============ TAB KUIS ============ -->
+<div id="tab-kuis" class="section">
+  <div id="kuis-soal" class="kuis-wrapper">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+      <span id="soal-counter" style="font-weight:700;color:var(--deep-sky);font-size:14px;">Soal 1 / 6</span>
+      <span id="skor-live" style="font-weight:700;color:var(--grass);font-size:14px;">⭐ 0 poin</span>
+    </div>
+    <div class="progress-bar-wrap">
+      <div class="progress-bar" id="progressBar" style="width:16.67%"></div>
+    </div>
+
+    <div class="soal-card" id="soalCard">
+      <div class="soal-num" id="soalNum">SOAL 1</div>
+      <div class="soal-text" id="soalText"></div>
+      <div class="opsi-list" id="opsiList"></div>
+      <div class="feedback-box" id="feedbackBox"></div>
+    </div>
+
+    <div class="nav-kuis">
+      <span id="hint-text" style="font-size:13px;color:#888;">Pilih jawaban yang benar!</span>
+      <button class="btn-primary" id="btnNext" onclick="nextSoal()" disabled>Lanjut →</button>
+    </div>
+  </div>
+
+  <div id="kuis-hasil" style="display:none" class="kuis-wrapper">
+    <div class="hasil-card">
+      <div class="hasil-emoji" id="hasilEmoji">🎉</div>
+      <div class="star-row" id="starRow"></div>
+      <div class="hasil-skor" id="hasilSkor"></div>
+      <div class="hasil-label" id="hasilLabel"></div>
+      <div class="hasil-pesan" id="hasilPesan"></div>
+      <button class="btn-primary" onclick="ulangKuis()">🔄 Ulangi Kuis</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ===== TABS =====
+function showTab(name) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + name).classList.add('active');
+  event.target.classList.add('active');
+}
+
+// ===== SIMULASI =====
+const stepData = {
+  evap: {
+    info: '<strong>💧 Evaporasi</strong> — Matahari memanaskan air di laut, danau, dan sungai. Air berubah menjadi uap dan naik ke udara. Proses ini seperti air yang menguap saat kamu memasak!',
+    rain: false, evap: true, labels: ['lbl-evap']
+  },
+  cond: {
+    info: '<strong>☁️ Kondensasi</strong> — Uap air naik tinggi dan mulai mendingin. Uap berubah kembali menjadi titik-titik air kecil yang berkumpul membentuk awan tebal.',
+    rain: false, evap: false, labels: ['lbl-cond']
+  },
+  prec: {
+    info: '<strong>🌧️ Presipitasi</strong> — Ketika awan sudah sangat penuh dengan air, air jatuh kembali ke bumi sebagai hujan. Di tempat dingin, bisa berupa salju atau hujan es!',
+    rain: true, evap: false, labels: ['lbl-prec']
+  },
+  run: {
+    info: '<strong>🌊 Aliran Air</strong> — Air hujan mengalir di permukaan tanah menuju sungai, danau, dan akhirnya kembali ke laut. Sebagian meresap ke tanah menjadi air tanah.',
+    rain: false, evap: false, labels: ['lbl-run']
+  },
+  all: {
+    info: '<strong>🔄 Siklus Lengkap!</strong> — Semua proses berjalan terus-menerus: Evaporasi → Kondensasi → Presipitasi → Aliran Air → Evaporasi lagi. Itulah mengapa siklus ini tidak pernah berhenti!',
+    rain: true, evap: true, labels: ['lbl-evap','lbl-cond','lbl-prec','lbl-run']
+  }
+};
+
+let activeStepBtn = null;
+function showStep(step, btn) {
+  const d = stepData[step];
+  document.getElementById('stepInfo').innerHTML = d.info;
+
+  const rain = document.getElementById('rainDrops');
+  const evap = document.getElementById('evapArrows');
+  rain.classList.toggle('show', d.rain);
+  evap.classList.toggle('show', d.evap);
+
+  ['lbl-evap','lbl-cond','lbl-prec','lbl-run'].forEach(id => {
+    document.getElementById(id).classList.remove('show');
+  });
+  d.labels.forEach(id => document.getElementById(id).classList.add('show'));
+
+  document.querySelectorAll('.step-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+// ===== MATERI =====
+function toggleMateri(el) {
+  el.style.background = el.style.background ? '' : '#E3F2FD';
+}
+
+// ===== KUIS =====
+const soalBank = [
+  {
+    soal: "Apa yang menyebabkan air di laut dan danau bisa menguap?",
+    opsi: ["Angin kencang", "Panas matahari", "Hujan deras", "Gravitasi bumi"],
+    jawaban: 1,
+    penjelasan: "✅ Benar! Panas dari matahari memberikan energi sehingga air menguap menjadi uap air."
+  },
+  {
+    soal: "Proses perubahan uap air menjadi titik-titik air yang membentuk awan disebut…",
+    opsi: ["Evaporasi", "Presipitasi", "Kondensasi", "Infiltrasi"],
+    jawaban: 2,
+    penjelasan: "✅ Benar! Kondensasi terjadi ketika uap air mendingin dan berubah menjadi tetes air kecil yang membentuk awan."
+  },
+  {
+    soal: "Air hujan yang jatuh ke tanah dan meresap ke dalam tanah disebut…",
+    opsi: ["Transpirasi", "Kondensasi", "Presipitasi", "Infiltrasi"],
+    jawaban: 3,
+    penjelasan: "✅ Benar! Infiltrasi adalah proses meresapnya air ke dalam tanah dan menjadi air tanah."
+  },
+  {
+    soal: "Penguapan air dari daun dan tumbuhan disebut…",
+    opsi: ["Evaporasi", "Transpirasi", "Kondensasi", "Presipitasi"],
+    jawaban: 1,
+    penjelasan: "✅ Benar! Transpirasi adalah penguapan air yang terjadi melalui stomata (pori-pori) daun tumbuhan."
+  },
+  {
+    soal: "Ketika awan sudah penuh dengan air dan air jatuh ke bumi, proses itu disebut…",
+    opsi: ["Kondensasi", "Evaporasi", "Presipitasi", "Transpirasi"],
+    jawaban: 2,
+    penjelasan: "✅ Benar! Presipitasi adalah jatuhnya air dari awan ke permukaan bumi dalam bentuk hujan, salju, atau es."
+  },
+  {
+    soal: "Siklus air terjadi secara terus-menerus. Hal ini berarti air di bumi…",
+    opsi: [
+      "Semakin berkurang setiap tahun",
+      "Hanya ada di lautan saja",
+      "Tidak akan pernah habis karena terus berputar",
+      "Bisa hilang ke luar angkasa"
+    ],
+    jawaban: 2,
+    penjelasan: "✅ Benar! Air terus bersirkulasi dalam siklus yang tidak pernah berhenti, sehingga jumlah air di bumi relatif tetap."
+  }
+];
+
+let currentSoal = 0;
+let skor = 0;
+let answered = false;
+const letters = ['A','B','C','D'];
+
+function renderSoal() {
+  const s = soalBank[currentSoal];
+  document.getElementById('soalNum').textContent = `SOAL ${currentSoal + 1}`;
+  document.getElementById('soalText').textContent = s.soal;
+  document.getElementById('soal-counter').textContent = `Soal ${currentSoal + 1} / ${soalBank.length}`;
+  document.getElementById('progressBar').style.width = `${((currentSoal + 1) / soalBank.length) * 100}%`;
+  document.getElementById('feedbackBox').style.display = 'none';
+  document.getElementById('btnNext').disabled = true;
+  document.getElementById('hint-text').textContent = 'Pilih jawaban yang benar!';
+  answered = false;
+
+  const opsiList = document.getElementById('opsiList');
+  opsiList.innerHTML = '';
+  s.opsi.forEach((o, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'opsi-btn';
+    btn.innerHTML = `<span class="opsi-letter">${letters[i]}</span> ${o}`;
+    btn.onclick = () => pilihJawaban(i, btn, s);
+    opsiList.appendChild(btn);
+  });
+}
+
+function pilihJawaban(idx, btn, s) {
+  if (answered) return;
+  answered = true;
+
+  const allBtns = document.querySelectorAll('.opsi-btn');
+  allBtns.forEach(b => b.classList.add('disabled'));
+
+  const fb = document.getElementById('feedbackBox');
+
+  if (idx === s.jawaban) {
+    btn.classList.add('benar');
+    skor += 10;
+    document.getElementById('skor-live').textContent = `⭐ ${skor} poin`;
+    fb.className = 'feedback-box benar';
+    fb.textContent = s.penjelasan;
+    document.getElementById('hint-text').textContent = '🎉 Jawaban benar!';
+  } else {
+    btn.classList.add('salah');
+    allBtns[s.jawaban].classList.add('benar');
+    fb.className = 'feedback-box salah';
+    fb.textContent = `❌ Belum tepat. ${s.penjelasan}`;
+    document.getElementById('hint-text').textContent = '💪 Coba lagi di soal berikutnya!';
+  }
+
+  fb.style.display = 'block';
+  document.getElementById('btnNext').disabled = false;
+}
+
+function nextSoal() {
+  currentSoal++;
+  if (currentSoal >= soalBank.length) {
+    tampilHasil();
+  } else {
+    renderSoal();
+  }
+}
+
+function tampilHasil() {
+  document.getElementById('kuis-soal').style.display = 'none';
+  document.getElementById('kuis-hasil').style.display = 'block';
+
+  const persen = (skor / (soalBank.length * 10)) * 100;
+  let emoji, label, pesan, stars;
+
+  if (persen === 100) {
+    emoji = '🏆'; label = 'SEMPURNA!';
+    pesan = 'Luar biasa! Kamu benar-benar memahami siklus air dengan sangat baik. Pertahankan semangatmu!';
+    stars = '⭐⭐⭐';
+  } else if (persen >= 70) {
+    emoji = '😊'; label = 'BAGUS SEKALI!';
+    pesan = 'Hebat! Kamu sudah memahami sebagian besar materi siklus air. Pelajari lagi bagian yang belum tepat ya!';
+    stars = '⭐⭐';
+  } else {
+    emoji = '💪'; label = 'TERUS BELAJAR!';
+    pesan = 'Jangan menyerah! Baca kembali materinya dan coba lagi. Kamu pasti bisa!';
+    stars = '⭐';
+  }
+
+  document.getElementById('hasilEmoji').textContent = emoji;
+  document.getElementById('hasilLabel').textContent = label;
+  document.getElementById('hasilSkor').textContent = `${skor} / ${soalBank.length * 10}`;
+  document.getElementById('hasilPesan').textContent = pesan;
+  document.getElementById('starRow').textContent = stars;
+}
+
+function ulangKuis() {
+  currentSoal = 0;
+  skor = 0;
+  document.getElementById('skor-live').textContent = '⭐ 0 poin';
+  document.getElementById('kuis-soal').style.display = 'block';
+  document.getElementById('kuis-hasil').style.display = 'none';
+  renderSoal();
+}
+
+// Init
+renderSoal();
+</script>
+</body>
+</html>
